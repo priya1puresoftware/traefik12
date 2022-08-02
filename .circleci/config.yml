@@ -20,7 +20,6 @@ jobs:
     resource_class: arm.medium
     steps:
       - checkout
-      - run: make test-unit
       - run: sudo apt-get update && sudo apt-get install curl
       - run: export "GOPATH=$(go env GOPATH)"
       - run: export GOPROXY=https://proxy.golang.org,direct
