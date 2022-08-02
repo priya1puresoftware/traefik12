@@ -1,0 +1,17 @@
+language: go
+matrix:
+    include:
+        - go: '1.17'
+          arch: arm64
+env:
+  IN_DOCKER: ""
+sudo: false
+# running in the container-based infrastructure without access to sudo
+install:
+    - sudo apt-get update && sudo apt-get install curl
+    - export "GOPATH=$(go env GOPATH)"
+    - export GOPROXY=https://proxy.golang.org,direct
+    - curl -sSfL https://gist.githubusercontent.com/traefiker/6d7ac019c11d011e4f131bb2cca8900e/raw/goreleaser.sh | bash -s -- -b "${GOPATH}/bin"
+script:
+    - make test-integration
+    - df -h
