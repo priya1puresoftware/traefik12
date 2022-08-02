@@ -1,0 +1,39 @@
+version: 2.1
+
+orbs: 
+  go: circleci/go@1.7.1
+  
+env:
+  GO_VERSION: 1.17
+  IN_DOCKER: ""
+run:
+when: "branch =~ '.*' OR pull_request =~'.*'"  
+jobs:
+  manylinux2014-aarch64:
+    parameters:
+      cibw_build:
+        type: string
+        default: "cp37-*"
+
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - checkout
+      - run: make test-unit
+      - run: sudo apt-get update && sudo apt-get install curl
+      - run: export "GOPATH=$(go env GOPATH)"
+      - run: export GOPROXY=https://proxy.golang.org,direct
+      - run: curl -sSfL https://gist.githubusercontent.com/traefiker/6d7ac019c11d011e4f131bb2cca8900e/raw/goreleaser.sh | bash -s -- -b "${GOPATH}/bin"
+      - run: make test-integration
+      - run: df -h           
+      
+workflows:
+  version: 2.1
+  main:
+    jobs:
+      - manylinux2014-aarch64:
+          matrix:
+            parameters:
+              cibw_build:
+                - "cp37*"
