@@ -31,14 +31,6 @@ jobs:
       - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f RedisSuite" make test-integration
       - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f RestSuite" make test-integration
       - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f RetrySuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f SimpleSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f TCPSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f TimeoutSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f TLSClientHeadersSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f TracingSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f UDPSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f WebsocketSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f ZookeeperSuite" make test-integration
       - run: df -h           
       
 workflows:
