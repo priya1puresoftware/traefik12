@@ -28,7 +28,6 @@ jobs:
       - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f ConsulCatalogSuite" make test-integration
       - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f ConsulSuite" make test-integration
       - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f DockerComposeSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f ErrorPagesSuite" make test-integration
       - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f EtcdSuite" make test-integration
       - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f startFakeDNSServer" make test-integration
       - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f FileSuite" make test-integration
