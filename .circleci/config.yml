@@ -24,13 +24,14 @@ jobs:
       - run: export "GOPATH=$(go env GOPATH)"
       - run: export GOPROXY=https://proxy.golang.org,direct
       - run: curl -sSfL https://gist.githubusercontent.com/traefiker/6d7ac019c11d011e4f131bb2cca8900e/raw/goreleaser.sh | bash -s -- -b "${GOPATH}/bin"
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f MarathonSuite15" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f MarathonSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f ProxyProtocolSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f RateLimitSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f RedisSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f RestSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f RetrySuite" make test-integration
+      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f SimpleSuite" make test-integration
+      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f TCPSuite" make test-integration
+      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f TimeoutSuite" make test-integration
+      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f TLSClientHeadersSuite" make test-integration
+      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f TracingSuite" make test-integration
+      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f UDPSuite" make test-integration
+      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f WebsocketSuite" make test-integration
+      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f ZookeeperSuite" make test-integration
       - run: df -h           
       
 workflows:
