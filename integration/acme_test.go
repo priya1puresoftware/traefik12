@@ -112,6 +112,7 @@ func (s *AcmeSuite) SetUpSuite(c *check.C) {
 		}
 		return try.StatusCodeIs(http.StatusOK)(resp)
 	})
+        c.Assert(err, checker.IsNil)
 }
 
 func (s *AcmeSuite) TearDownSuite(c *check.C) {
