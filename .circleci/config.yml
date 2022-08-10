@@ -24,7 +24,6 @@ jobs:
       - run: export "GOPATH=$(go env GOPATH)"
       - run: export GOPROXY=https://proxy.golang.org,direct
       - run: curl -sSfL https://gist.githubusercontent.com/traefiker/6d7ac019c11d011e4f131bb2cca8900e/raw/goreleaser.sh | bash -s -- -b "${GOPATH}/bin"
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f MarathonSuite" make test-integration
       - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f ProxyProtocolSuite" make test-integration
       - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f RateLimitSuite" make test-integration
       - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f RedisSuite" make test-integration
