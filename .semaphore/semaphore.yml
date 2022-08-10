@@ -34,20 +34,45 @@ blocks:
   - name: Test Integration
     dependencies: []
     run:
-      when: "branch =~ '.*' OR pull_request =~'.*'"
+      when: branch =~ '.*' OR pull_request =~'.*'
     task:
       jobs:
         - name: Test Integration
+          matrix:
+          - env_var: ARCH
+            values: ["amd64"]
           commands:
+            - uname -a
             - make pull-images
-            - touch webui/static/index.html # Avoid generating webui
+            - touch webui/static/index.html
             - IN_DOCKER="" make binary
-            - make test-integration
+            - make test-integration ARCH=$ARCH
             - df -h
       epilogue:
         always:
           commands:
             - cache store traefik-$(checksum go.sum) $HOME/go/pkg/mod
+  - name: Test Integration for arm64
+    dependencies: []
+    run:
+      when: branch =~ '.*' OR pull_request =~'.*'
+    task:
+      jobs:
+        - name: Test Integration
+          matrix:
+          - env_var: ARCH
+            values: ["arm64"]
+          commands:
+            - make pull-images
+            - touch webui/static/index.html
+            - IN_DOCKER="" make binary
+            - make test-integration
+            - uname -a
+            - df -h
+      epilogue:
+        always:
+          commands:
+            - cache store traefik-$(checksum go.sum) $HOME/go/pkg/mod      
 
   - name: Release
     dependencies: []
