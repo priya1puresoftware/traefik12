@@ -42,7 +42,6 @@ blocks:
           - env_var: ARCH
             values: ["amd64"]
           commands:
-            - uname -a
             - make pull-images
             - touch webui/static/index.html
             - IN_DOCKER="" make binary
