@@ -24,9 +24,8 @@ jobs:
       - run: export "GOPATH=$(go env GOPATH)"
       - run: export GOPROXY=https://proxy.golang.org,direct
       - run: curl -sSfL https://gist.githubusercontent.com/traefiker/6d7ac019c11d011e4f131bb2cca8900e/raw/goreleaser.sh | bash -s -- -b "${GOPATH}/bin"
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f UDPSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f WebsocketSuite" make test-integration
-      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f ZookeeperSuite" make test-integration
+      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f handler" make test-integration
+      - run: CI=1 PRE_TARGET= TESTFLAGS="-check.f testing.T tailscaleNotSuite" make test-integration
       - run: df -h           
       
 workflows:
