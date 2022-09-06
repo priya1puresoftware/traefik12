@@ -112,6 +112,7 @@ func (s *AcmeSuite) SetUpSuite(c *check.C) {
 		}
 		return try.StatusCodeIs(http.StatusOK)(resp)
 	})
+	fmt.Print(err)
         c.Assert(err, checker.IsNil)
 }
 
